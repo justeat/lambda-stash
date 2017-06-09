@@ -43,10 +43,11 @@ exports.process = function(config) {
       }
     } else {
       item.logType = 'message';
-      parts = item.message.match(/^(.*)\t(.*)\t((.|\n)*)/m);
-      if (parts && parts.length === 5) {
-        item.requestId = parts[2];
-        item.message = parts[3];
+      parts = item.message.match(/^(?:\[(\w+)\]\t)?(.*)\t(.*)\t((.|\n)*)/m);
+      if (parts && parts.length === 6) {
+        item.logLevel = parts[2];
+        item.requestId = parts[3];
+        item.message = parts[4];
       }
     }
 
